@@ -43,22 +43,22 @@ namespace Unpacker {
 		private static Tuple<Dictionary<String, byte[]>, CC> a(byte[] a) {
 			//Debug.WriteLine("Loading Encrypted Zip...");
 			try {
-				using(var A = new MemoryStream(a)) {
-					using(var b = new System.IO.Compression.ZipArchive(A, System.IO.Compression.ZipArchiveMode.Read)) {
+				using (var A = new MemoryStream(a)) {
+					using (var b = new System.IO.Compression.ZipArchive(A, System.IO.Compression.ZipArchiveMode.Read)) {
 						CC B = null;
-						foreach(var c in b.Entries) {
-							if(c.Name == CC.b)
-								using(var r = new StreamReader(c.Open()))
+						foreach (var c in b.Entries) {
+							if (c.Name == CC.b)
+								using (var r = new StreamReader(c.Open()))
 									B = CC.a(r);
 						}
-						var decr = new CB(b, B?? throw new FileNotFoundException(/*"Config file Missing in package"*/));
+						var decr = new CB(b, B ?? throw new FileNotFoundException(/*"Config file Missing in package"*/));
 						decr.C(Program.b);
 						return new Tuple<Dictionary<String, byte[]>, CC>(decr.c, B);
 					}
 				}
 			}
-			catch(Exception ex) {
-				Console.WriteLine($"Error loading encrypted module : { ex.ToString()}");
+			catch (Exception /*ex*/) {
+				//Console.WriteLine($"Error loading encrypted module : { ex.ToString()}");
 				return null;
 			}
 		}
@@ -67,7 +67,25 @@ namespace Unpacker {
 		/// </summary>
 		/// <param name="a"></param>
 		/// <returns></returns>
-		private static Assembly A(Tuple<Dictionary<String, byte[]>, CC> a) => Assembly.Load(a.Item1[a.Item2.d]);
+		private static Assembly A(Tuple<Dictionary<String, byte[]>, CC> a) {
+			var b = Assembly.Load(a.Item1[a.Item2.d]);
+			a.Item1.Clear();
+			return b;
+		}
+		/// <summary>
+		/// Uncompress
+		/// </summary>
+		/// <param name="a"></param>
+		/// <returns></returns>
+		private static void A(Tuple<Dictionary<String, byte[]>, CC> a, out string b) {
+			var c = Path.GetTempFileName();
+			File.Delete(c);
+			b = Path.GetTempPath() + Path.GetFileNameWithoutExtension(c) + "\\";
+			Directory.CreateDirectory(b);
+			foreach (var d in a.Item1)
+				if (d.Key != a.Item2.d)
+					File.WriteAllBytes(b + d.Key, d.Value);
+		}
 		/// <summary>
 		/// Run
 		/// </summary>
@@ -75,21 +93,21 @@ namespace Unpacker {
 		/// <param name="A"></param>
 		private static void A(Assembly a, string[] A) {
 			MethodInfo b = null, B = null;
-			foreach(var c in a.GetTypes()) {
+			foreach (var c in a.GetTypes()) {
 				//Debug.WriteLine(c.Name);
-				foreach(var C in c.GetMethods()) {
+				foreach (var C in c.GetMethods()) {
 					//Debug.WriteLine(m.Name);
-					if(C.IsStatic) {
-						if(C.Name == "Main")
+					if (C.IsStatic) {
+						if (C.Name == "Main")
 							B = C;
-						else if(C.Name == "Run")
+						else if (C.Name == "Run")
 							b = C;
 					}
 				}
 			}
-			if(B != null)
+			if (B != null)
 				B.Invoke(null, new object[] { A });
-			else if(b != null)
+			else if (b != null)
 				b.Invoke(null, new object[] { A });
 		}
 		/// <summary>
@@ -99,13 +117,17 @@ namespace Unpacker {
 		/// <returns></returns>
 		static string A(string A) => A.Substring(0, new Regex(@"^.+?\.").Match(A).Length);
 		static void Main(string[] B) {
-			byte[] b;
-			using(var a = new MemoryStream()) {
+			Tuple<Dictionary<String, byte[]>, CC> b;
+			using (var c = new MemoryStream()) {
 				var C = Assembly.GetExecutingAssembly();
-				C.GetManifestResourceStream(A(C.GetManifestResourceNames()[0]) + c).CopyTo(a);
-				b = a.ToArray();
+				C.GetManifestResourceStream(A(C.GetManifestResourceNames()[0]) + Program.c).CopyTo(c);
+				b = a(A(c.ToArray()));
 			}
-			A(A(a(A(b))), B);
+			{
+				A(b, out var c);
+				Directory.SetCurrentDirectory(c);
+			}
+			A(A(b), B);
 		}
 	}
 }

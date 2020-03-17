@@ -17,11 +17,18 @@ namespace DVPacker {
 		private string _payloadName = null;
 		private string _code = null;
 		private string _proj = null;
-		private string _GenPayloadName() => new string(Path.GetFileNameWithoutExtension(Path.GetTempFileName()).Insert(0, Path.GetRandomFileName()).ToCharArray().OrderBy(x => rng.Next()).ToArray());
+		private string _GenPayloadName() => new string(Path.GetFileNameWithoutExtension(genTempfFileName()).Insert(0, Path.GetRandomFileName()).ToCharArray().OrderBy(x => rng.Next()).ToArray());
+		private string genTempfFileName() {
+			var tf = Path.GetTempFileName();
+			File.Delete(tf);
+			return tf;
+		}
+		private string __genTempFolderPath() => Path.GetFileNameWithoutExtension(genTempfFileName());
 		#endregion
 		private Random rng => _rng ?? (_rng = new Random());
 #pragma warning restore IDE1006 // Benennungsstile
-		public string CompilerFolder => _compilerFolder ?? (_compilerFolder = Path.GetTempPath() + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "\\");
+		
+		public string CompilerFolder => _compilerFolder ?? (_compilerFolder = Path.GetTempPath() + __genTempFolderPath() + "\\");
 		private string PayloadName => _payloadName ?? (_payloadName = _GenPayloadName());
 		private string CodeFolder => CompilerFolder + "Included\\";
 		private string MainCS => CodeFolder + "Program.cs";
@@ -50,7 +57,7 @@ namespace DVPacker {
 				Process.GetProcessesByName("VBCSCompiler").ToList().ForEach((p) => p.Kill());
 			}
 			catch (Exception ex) {
-				t.Output=$"\tError during cleanup... Couldn't kill one or more Compilers: {ex.Message}";
+				t.Output = $"\tError during cleanup... Couldn't kill one or more Compilers: {ex.Message}";
 			}
 			if (Directory.Exists(CompilerFolder))
 				Directory.Delete(CompilerFolder, true);
@@ -112,7 +119,7 @@ namespace DVPacker {
 			//Debug.WriteLine("Out: " + p.StandardOutput.ReadToEnd());
 			//Debug.WriteLine("Err: " + p.StandardError.ReadToEnd());
 			while (!p.HasExited)
-				acc.Output ="\t\t"+ p.StandardOutput.ReadLine();
+				acc.Output = "\t\t" + p.StandardOutput.ReadLine();
 			p.WaitForExit();
 		}
 		static string GenSSCode(SecureString ss) {
