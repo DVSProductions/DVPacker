@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -8,11 +6,11 @@ using System.Windows;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("DVPacker")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A tool for generating Packed Executables")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("DVSProductions")]
 [assembly: AssemblyProduct("DVPacker")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright ©DVSProductions 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
