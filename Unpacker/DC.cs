@@ -10,11 +10,23 @@ using System.Security;
 /// Decryptor
 /// </summary>
 sealed class CB {
+	/// <summary>
+	/// crypto
+	/// </summary>
 	[Import]
-	IA A;//crypto
-	readonly Dictionary<string, byte[]> a;//files
-	bool B = false;//succesfullyDecrypted
-	readonly Dictionary<string, byte[]> b;//decryptedFiles
+	IA A;
+	/// <summary>
+	/// files
+	/// </summary>
+	readonly Dictionary<string, byte[]> a;
+	/// <summary>
+	/// succesfullyDecrypted
+	/// </summary>
+	bool B = false;
+	/// <summary>
+	/// decryptedFiles
+	/// </summary>
+	readonly Dictionary<string, byte[]> b;
 	public CB(ZipArchive B, CC A) {
 		a = new Dictionary<string, byte[]>();
 		b = new Dictionary<string, byte[]>();
