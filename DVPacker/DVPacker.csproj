@@ -67,16 +67,16 @@
     <Compile Include="EncryptedServerConfig.cs" />
     <Compile Include="IStep.cs" />
     <Compile Include="ServerCryptoAES.cs" />
-    <Compile Include="Step1.xaml.cs">
+    <Compile Include="Pages\Step1.xaml.cs">
       <DependentUpon>Step1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Step2.xaml.cs">
+    <Compile Include="Pages\Step2.xaml.cs">
       <DependentUpon>Step2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Step3.xaml.cs">
+    <Compile Include="Pages\Step3.xaml.cs">
       <DependentUpon>Step3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Step4.xaml.cs">
+    <Compile Include="Pages\Step4.xaml.cs">
       <DependentUpon>Step4.xaml</DependentUpon>
     </Compile>
     <Compile Include="UIHelpers\FieldSet.cs" />
@@ -93,19 +93,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Step1.xaml">
+    <Page Include="Pages\Step1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Step2.xaml">
+    <Page Include="Pages\Step2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Step3.xaml">
+    <Page Include="Pages\Step3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Step4.xaml">
+    <Page Include="Pages\Step4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
