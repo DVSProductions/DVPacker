@@ -8,10 +8,16 @@
       d:DesignHeight="450"
       Title="Step4" d:DesignWidth="328">
 	<Grid>
-		<TextBox x:Name="tbOutput" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5" VerticalContentAlignment="Bottom" FontFamily="Consolas" BorderBrush="Black" Foreground="#FFCB5757" Background="#60000000" Margin="10,10,10,140"/>
-		<StackPanel Margin="10" VerticalAlignment="Bottom">
-			<ProgressBar BorderBrush="Black" Foreground="{DynamicResource LightRed}" Background="#7F000000" x:Name="pb" Height="49" Maximum="4"/>
-			<Button Style="{DynamicResource BTStyle}" Margin="10" Content="Build" HorizontalAlignment="Center" Width="124" Height="49" VerticalAlignment="Bottom" Click="Button_Click_3"/>
-		</StackPanel>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="10"/>
+			<RowDefinition Height="50"/>
+		</Grid.RowDefinitions>
+		<TextBox x:Name="tbOutput" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5" VerticalContentAlignment="Bottom" FontFamily="Consolas" BorderBrush="Black" Foreground="#FFCB5757" Background="#60000000" Margin="10,10,10,10.2"/>
+
+		<ProgressBar Margin="10,0" Grid.Row="1" BorderBrush="Black" Foreground="{DynamicResource LightRed}" Background="#7F000000" x:Name="pb" Maximum="4"/>
+		<Button Grid.Row="2" Style="{DynamicResource BTStyle}" Content="Build" HorizontalAlignment="Center" Width="124" Height="50" VerticalAlignment="Bottom" Click="Button_Click_3" Margin="102,0" Grid.RowSpan="2"/>
+
 	</Grid>
 </Page>

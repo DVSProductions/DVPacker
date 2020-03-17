@@ -12,9 +12,7 @@ namespace DVPacker {
 			myParent = parent;
 			InitializeComponent();
 		}
-
 		public bool IsReady { get; private set; } = false;
-
 		private void Button_Click(object sender, RoutedEventArgs e) {
 			var dlg = new Microsoft.Win32.OpenFileDialog {
 				DefaultExt = "*.dll",
@@ -31,6 +29,7 @@ namespace DVPacker {
 				myParent.cfg.d = Path.GetFileName(dlg.FileName);
 				(sender as Button).Content = myParent.cfg.d;
 				IsReady = true;
+				myParent.Title = $"DVPacker - {myParent.cfg.d}";
 			}
 		}
 	}

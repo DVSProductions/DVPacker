@@ -66,6 +66,9 @@
     <Compile Include="CryptoWrapper.cs" />
     <Compile Include="EncryptedServerConfig.cs" />
     <Compile Include="IStep.cs" />
+    <Compile Include="Pages\Step5.xaml.cs">
+      <DependentUpon>Step5.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServerCryptoAES.cs" />
     <Compile Include="Pages\Step1.xaml.cs">
       <DependentUpon>Step1.xaml</DependentUpon>
@@ -106,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Step4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Step5.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
