@@ -1,0 +1,17 @@
+﻿<Page x:Class="DVPacker.Step2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DVPacker"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Step2">
+
+	<local:FieldSet Background="{DynamicResource BGColor}" BorderBrush="{DynamicResource LightRed}" Foreground="White" Margin="2.5" Header="Step 2: Additional Files" >
+		<Grid Margin="5">
+			<ListBox Background="#3F000000"  x:Name="lbAdditional" Margin="0,0,0,25" BorderBrush="Black"/>
+			<Button Style="{DynamicResource BTStyle}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0,-7,-0.3,0" FontSize="22"  Height="25" Width="25" Content="+" Foreground="Red" BorderBrush="Black" Click="Button_Click_1"/>
+		</Grid>
+	</local:FieldSet>
+</Page>
