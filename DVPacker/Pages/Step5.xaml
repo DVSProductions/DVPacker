@@ -1,0 +1,18 @@
+﻿<Page x:Class="DVPacker.Step5"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DVPacker"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="400"
+      Title="Step5">
+
+	<Grid>
+		<StackPanel   HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Label Margin="0,30,0,10" Content="Packing Complete!" Foreground="White" FontSize="30" />
+			<Button Margin="0,10" Padding="10" Style="{DynamicResource BTStyle}" Content="Locate result" IsDefault="True" Click="Button_Click" />
+			<Button Margin="0,10" Padding="10" Style="{DynamicResource BTStyle}" Content="Start over" Click="Button_Click_1"/>
+		</StackPanel>
+	</Grid>
+</Page>

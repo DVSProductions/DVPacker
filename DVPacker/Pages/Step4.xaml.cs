@@ -23,7 +23,6 @@ namespace DVPacker {
 		private string outputCache = "";
 		public string Output { get => outputCache; set => outputCache += '\n' + value; }
 		public string OutputNoNL { get => outputCache; set => outputCache += value; }
-
 		readonly MainWindow p;
 		public Step4(MainWindow parent) {
 			p = parent;
@@ -72,8 +71,11 @@ namespace DVPacker {
 				};
 				Output = "Waiting for Output file...";
 				if (dlg.ShowDialog() == false) {
+					Output = "Dialog closed without answer.";
 					return;
 				}
+				else
+					p.outputlocation = dlg.FileName;
 				switch (p.encryptionType) {
 					case CC.A.A:
 						p.crypto = new CES();
@@ -98,7 +100,7 @@ namespace DVPacker {
 					return;
 				}
 				Output = "Compressing...";
-				
+
 				try {
 					var t = new Thread(() => CreateZipMemoryThread(dat)) {
 						Name = "Compressor",
@@ -117,6 +119,7 @@ namespace DVPacker {
 				Output = "Running Compiler...";
 				await RunCompiler(r, zipMemory, PasswordS, dlg.FileName);
 				zipMemory = null;
+				p.CurrentPage=p.GetPage(++p.step);
 			}
 			finally {
 				pb.IsIndeterminate = false;
@@ -175,7 +178,7 @@ namespace DVPacker {
 				ExecutionLevel = this.p.s3.ExecutionLevel,
 				uiAccess = this.p.s3.UIAccess
 			};
-			var compiler = new Thread(() => Compiler.Compile(AES.II(zipMemory, AES.I(pw)), p,this)) {
+			var compiler = new Thread(() => Compiler.Compile(AES.II(zipMemory, AES.I(pw)), p, this)) {
 				Priority = ThreadPriority.Highest
 			};
 			Compiler.stage = 0;
@@ -190,7 +193,7 @@ namespace DVPacker {
 			pb.Value = Compiler.stage;
 			compiler.Join();
 			CES.salt = psalt;
-			
+
 		}
 	}
 }
