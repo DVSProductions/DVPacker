@@ -1,0 +1,18 @@
+﻿<Window x:Class="DVPacker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVPacker"
+        mc:Ignorable="d" Background="{DynamicResource BGColor}"
+        Title="MainWindow" Height="450" Width="415.613">
+	<Grid>
+		<Grid Margin="10">
+			<Frame x:Name="Viewer" NavigationUIVisibility="Hidden" Margin="0,0,0,59"/>
+			<Grid Margin="0" Height="59" VerticalAlignment="Bottom">
+				<Button Style="{DynamicResource BTStyle}" x:Name="btN" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10" Width="100" Content="Next>" Click="Button_Click_4"/>
+				<Button Style="{DynamicResource BTStyle}" x:Name="btP"  HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10" Width="100" Content="&lt;Previous" Visibility="Hidden" Click="Button_Click_5"/>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>
