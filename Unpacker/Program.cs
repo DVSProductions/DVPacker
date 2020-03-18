@@ -77,7 +77,7 @@ namespace Unpacker {
 		/// </summary>
 		/// <param name="a"></param>
 		/// <returns></returns>
-		private static void A(Tuple<Dictionary<String, byte[]>, CC> a, out string b) {
+		private static string A(Tuple<Dictionary<String, byte[]>, CC> a, out string b) {
 			var c = Path.GetTempFileName();
 			File.Delete(c);
 			b = Path.GetTempPath() + Path.GetFileNameWithoutExtension(c) + "\\";
@@ -85,13 +85,14 @@ namespace Unpacker {
 			foreach (var d in a.Item1)
 				if (d.Key != a.Item2.d)
 					File.WriteAllBytes(b + d.Key, d.Value);
+			return b;
 		}
 		/// <summary>
 		/// Run
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="A"></param>
-		private static void A(Assembly a, string[] A) {
+		private static string A(Assembly a, string[] A) {
 			MethodInfo b = null, B = null;
 			foreach (var c in a.GetTypes()) {
 				//Debug.WriteLine(c.Name);
@@ -109,6 +110,7 @@ namespace Unpacker {
 				B.Invoke(null, new object[] { A });
 			else if (b != null)
 				b.Invoke(null, new object[] { A });
+			return "..";
 		}
 		/// <summary>
 		/// Get namespace name
@@ -123,11 +125,9 @@ namespace Unpacker {
 				C.GetManifestResourceStream(A(C.GetManifestResourceNames()[0]) + Program.c).CopyTo(c);
 				b = a(A(c.ToArray()));
 			}
-			{
-				A(b, out var c);
-				Directory.SetCurrentDirectory(c);
-			}
-			A(A(b), B);
+			Directory.SetCurrentDirectory(A(b, out var d));
+			Directory.SetCurrentDirectory(A(A(b), B));
+			Directory.Delete(d);
 		}
 	}
 }
